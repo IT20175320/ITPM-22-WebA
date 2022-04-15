@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ITPM_22_WebA.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ITPM_22_WebA
 {
@@ -25,6 +26,7 @@ namespace ITPM_22_WebA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("Myconnection")));
        
         }
 
@@ -52,7 +54,7 @@ namespace ITPM_22_WebA
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Memb}/{action=Index}/{id?}");
             });
         }
     }
