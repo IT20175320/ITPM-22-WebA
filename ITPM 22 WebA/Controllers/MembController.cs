@@ -26,5 +26,49 @@ namespace ITPM_22_WebA.Controllers
 
             return View(displaydata);
         }
+
+        public IActionResult Create()
+
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>Create(NewMemberClass nec)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Add(nec);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+
+            }
+            return View(nec);
+        }
+
+        public async Task<IActionResult> Edit (int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+
+            }
+
+            var getMembdetails = await _db.MemberTable.FindAsync(id);
+            return View(getMembdetails);
+        }
+           
+        [HttpPost]
+        public async Task<IActionResult> Edit (NewMemberClass nc)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Update(nc);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+
+            }
+            return View(nc);
+        }
     }
 }

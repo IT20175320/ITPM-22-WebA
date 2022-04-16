@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Mid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ename)
+                @Html.DisplayNameFor(model => model.Mname)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Age)
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Mid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ename)
+                @Html.DisplayFor(modelItem => item.Mname)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Age)
@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Pnumber)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Mid }, new {@class="btn btn-primary"})
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

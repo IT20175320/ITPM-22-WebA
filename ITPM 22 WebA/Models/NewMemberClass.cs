@@ -14,7 +14,7 @@ namespace ITPM_22_WebA.Models
         [Required(ErrorMessage ="Enter Member Name")]
         [Display(Name = "Member Name")]
       
-        public string Ename { get; set; }
+        public string Mname { get; set; }
 
         [Required(ErrorMessage ="Enter Age of Member")]
         [Display(Name = "Age" )]
