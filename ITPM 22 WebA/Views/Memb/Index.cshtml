@@ -9,6 +9,15 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <p>
+        <input tyoe="search" placeholder="Enter Member Name Or Email.." value="@ViewData["Getmemberdetails"] "name="Membsearh" style="width:500px;" />
+        <input type ="submit" value="search" class="btn btn-primary"/>
+        <a asp-action="Index"> List All Members</a>
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>

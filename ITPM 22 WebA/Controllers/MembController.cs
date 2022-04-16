@@ -27,6 +27,23 @@ namespace ITPM_22_WebA.Controllers
             return View(displaydata);
         }
 
+        //search
+        [HttpGet]
+
+        public async Task<IActionResult> Index (string Membsearch)
+        {
+            ViewData["Getmemberdetails"] = Membsearch;
+
+            var memquery = from x in _db.MemberTable select x;
+            if(!string.IsNullOrEmpty(Membsearch))
+            {
+                memquery = memquery.Where(x =>x.Mname.Contains(Membsearch) || x.Email.Contains(Membsearch));
+            }
+
+            return View(await memquery.AsNoTracking().ToListAsync());
+
+        }
+
         public IActionResult Create()
 
         {
