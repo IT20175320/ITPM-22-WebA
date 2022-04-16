@@ -46,6 +46,7 @@ namespace ITPM_22_WebA.Controllers
             return View(nec);
         }
 
+        //Edit btn
         public async Task<IActionResult> Edit (int? id)
         {
             if (id == null)
@@ -70,5 +71,44 @@ namespace ITPM_22_WebA.Controllers
             }
             return View(nc);
         }
+        
+        //Details btn
+        public async Task<IActionResult> Details (int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+
+            }
+
+            var getMembdetails = await _db.MemberTable.FindAsync(id);
+            return View(getMembdetails);
+        }
+
+        //Delete btn
+        public async Task<IActionResult> Delete (int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+
+            }
+
+            var getMembdetails = await _db.MemberTable.FindAsync(id);
+            return View(getMembdetails);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+          
+            var getMembdetails = await _db.MemberTable.FindAsync(id);
+            _db.MemberTable.Remove(getMembdetails);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

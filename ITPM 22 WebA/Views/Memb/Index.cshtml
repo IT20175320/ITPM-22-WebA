@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ITPM_22_WebA.Models.NewMemberClass>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Member Details";
 }
 
-<h1>Index</h1>
+<h1>Member Details</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -56,8 +56,8 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.Mid }, new {@class="btn btn-primary"})
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Details", "Details", new { id = item.Mid }, new { @class = "btn btn-success"})
+                @Html.ActionLink("Delete", "Delete", new {  id = item.Mid }, new { @class = "btn btn-danger"})
             </td>
         </tr>
 }
