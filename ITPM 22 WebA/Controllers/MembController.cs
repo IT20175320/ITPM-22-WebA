@@ -57,6 +57,7 @@ namespace ITPM_22_WebA.Controllers
             {
                 _db.Add(nec);
                 await _db.SaveChangesAsync();
+                TempData["save"] = "This Member has been added";
                 return RedirectToAction("Index");
 
             }
@@ -83,6 +84,7 @@ namespace ITPM_22_WebA.Controllers
             {
                 _db.Update(nc);
                 await _db.SaveChangesAsync();
+                TempData["Edit"] = "Member details has been Updated";
                 return RedirectToAction("Index");
 
             }
@@ -123,7 +125,7 @@ namespace ITPM_22_WebA.Controllers
             var getMembdetails = await _db.MemberTable.FindAsync(id);
             _db.MemberTable.Remove(getMembdetails);
             await _db.SaveChangesAsync();
-
+            TempData["Delete"] = "Member details has been Deleted";
             return RedirectToAction("Index");
         }
 

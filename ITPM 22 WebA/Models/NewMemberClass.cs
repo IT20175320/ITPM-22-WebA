@@ -37,7 +37,7 @@ namespace ITPM_22_WebA.Models
         [Display(Name = "Phone Number")]
         [StringLength(10)]
 
-        public string Pnumber { get; set;  }
+        public string Pnumber { get; set; }
 
 
 

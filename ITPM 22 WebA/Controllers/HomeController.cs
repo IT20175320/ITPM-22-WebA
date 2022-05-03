@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ITPM_22_WebA.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,7 +12,7 @@ namespace ITPM_22_WebA.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IWebHostEnvironment _oHostEnvironment;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -23,15 +24,30 @@ namespace ITPM_22_WebA.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public ActionResult PrintMember(int param)
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            List<NewMemberClass> oMembers = new List<NewMemberClass>();
+
+            for (int i=1; i <= 10; i++)
+            {
+                NewMemberClass oMember = new NewMemberClass();
+                oMember.Mid = i;
+                oMember.Mname = "Mname" + i;
+                oMember.Email = "Email" + i;
+                oMember.Address = "Address" + i;
+                oMember.Pnumber = "Pnumber" + i;
+
+
+                oMembers.Add(oMember);
+            }
+
+            MemberReport rpt = new MemberReport(_oHostEnvironment);
+            return File(rpt.Report(oMembers),"application/pdf_-");
         }
+     
     }
 }
+
+
+
