@@ -8,16 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using System.Xml.Serialization;
 using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using ITPM_22_WebA.Reports;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
+
 
 namespace ITPM_22_WebA.Controllers
 {
     public class MembController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _oHostEnvironment;
 
         public MembController(ApplicationDbContext db)
         {
             _db = db;
+
         }
 
         public IActionResult Index()
@@ -37,7 +46,7 @@ namespace ITPM_22_WebA.Controllers
             var memquery = from x in _db.MemberTable select x;
             if(!string.IsNullOrEmpty(Membsearch))
             {
-                memquery = memquery.Where(x =>x.Mname.Contains(Membsearch) || x.Email.Contains(Membsearch));
+                memquery = memquery.Where(x =>x.Mname.Contains(Membsearch));
             }
 
             return View(await memquery.AsNoTracking().ToListAsync());
@@ -128,6 +137,21 @@ namespace ITPM_22_WebA.Controllers
             TempData["Delete"] = "Member details has been Deleted";
             return RedirectToAction("Index");
         }
+
+        public IActionResult PrintReport(int param)
+        {
+            List<NewMemberClass> getmemberdetails = new List<NewMemberClass>();
+
+
+
+            getmemberdetails = _db.MemberTable.ToList();
+
+
+
+            MemberReport rpt = new MemberReport(_oHostEnvironment);
+            return File(rpt.Report(getmemberdetails), "application/pdf");
+        }
+
 
     }
 }
